@@ -41,7 +41,7 @@ Official Cat 1-4 distribution:
 
 | Variable | Value |
 |---|---|
-| Answer-generation model | `gpt-5` |
+| Answer-generation model | `gpt-5-mini` |
 | Judge model | `gpt-5-mini` |
 | Judge protocol | Binary **CORRECT / WRONG** against the gold answer |
 | LongMemEval scope | Full 500-question set, all 6 categories |
@@ -61,7 +61,7 @@ Official Cat 1-4 distribution:
 
 ## Why vendor scores differ
 
-The single most important thing to understand about agent-memory leaderboards is that **the configuration moves the score as much as the system does.** Supermemory's own results move from 81.6% to 85.2% on LongMemEval *just by switching the answer model*. Below is a side-by-side of the variables that matter, compiled from each vendor's published papers, blogs, and evaluation code.
+The single most important thing to understand about agent-memory leaderboards is that **the configuration moves the score as much as the system does.** Supermemory's own results move from 81.6% to 85.2% on LongMemEval *just by switching the answer model*. Synap's 92.0% is produced with `gpt-5-mini`, a smaller answer model than the `gpt-5` / Gemini-3 Pro configurations several competitors report, which isolates the contribution of the memory layer itself. Below is a side-by-side of the variables that matter, compiled from each vendor's published papers, blogs, and evaluation code.
 
 | Variable | Mem0 | Zep | Letta (MemGPT) | Supermemory | Why it matters |
 |---|---|---|---|---|---|
@@ -92,7 +92,7 @@ For reference, each vendor's best self-reported LongMemEval accuracy:
 
 | System | Accuracy | Answer model | Judge | Source |
 |---|:---:|---|---|---|
-| **Synap** | **92.0%** | `gpt-5` | `gpt-5-mini` | This repo |
+| **Synap** | **92.0%** | `gpt-5-mini` | `gpt-5-mini` | This repo |
 | Supermemory | 85.2% | Gemini-3 Pro | `gpt-4o` | [supermemory.ai/research](https://supermemory.ai/research) |
 | Supermemory | 84.6% | `gpt-5` | `gpt-4o` | [supermemory.ai/research](https://supermemory.ai/research) |
 | Supermemory | 81.6% | `gpt-4o` | `gpt-4o` | [supermemory.ai/research](https://supermemory.ai/research) |
@@ -106,7 +106,7 @@ For reference, each vendor's best self-reported LongMemEval accuracy:
 
 1. Clone the harness: [`maximem-ai/memory_and_context_eval_harness`](https://github.com/maximem-ai/memory_and_context_eval_harness).
 2. Download the official datasets (`LongMemEval_S`, `locomo10`).
-3. Ingest into Synap, then run the answer + judge pass with `gpt-5` / `gpt-5-mini`.
+3. Ingest into Synap, then run the answer + judge pass with `gpt-5-mini`.
 4. Score LongMemEval over all 500 questions; score LoCoMo over Cat 1-4.
 
 Per-run artifacts (generated answers, retrieved context, per-question judge verdicts) are maintained by the Maximem evaluation team and available on request.

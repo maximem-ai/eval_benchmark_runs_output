@@ -9,8 +9,8 @@ repository-code: "https://github.com/maximem-ai/eval_benchmark_runs_output"
 abstract: >-
   Reproducible benchmark results for Maximem Synap, the memory layer for AI
   agents. Synap scores 93.2% on LoCoMo (Cat 1-4, adversarial excluded) and
-  92.0% on the full 500-question LongMemEval set, with gpt-5 as the answer
-  model and gpt-5-mini as a binary LLM-as-judge.
+  92.0% on the full 500-question LongMemEval set, using gpt-5-mini as both the
+  answer model and the binary LLM-as-judge.
 keywords:
   - agent-memory
   - long-term-memory

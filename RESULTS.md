@@ -6,7 +6,7 @@ These are the category-level numbers behind the published headlines of
 
 ## Methodology
 
-- **Answer model:** `gpt-5`
+- **Answer model:** `gpt-5-mini`
 - **Judge:** binary CORRECT / WRONG (`gpt-5-mini`)
 - **LoCoMo:** Cat 1-4 only; adversarial (Cat 5) excluded per industry
   convention (mem0, Zep, original LoCoMo paper). Full set, all 1,540 questions.

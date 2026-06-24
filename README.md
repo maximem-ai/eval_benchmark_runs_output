@@ -2,11 +2,14 @@
 
 # Synap: Agent Memory Benchmark Results
 
-**Reproducible benchmark results for [Maximem Synap](https://github.com/maximem-ai/maximem_synap_sdk), the memory layer that makes AI agents remember.**
+*Your AI agents forget. Synap makes them remember.*
+
+**Reproducible benchmark results for [Maximem Synap](https://www.maximem.ai/synap), the memory layer for production AI agents.**
 
 [![LoCoMo](https://img.shields.io/badge/LoCoMo-93.2%25-2ea44f?style=for-the-badge)](RESULTS.md#locomo-overall-932-cat-1-4-adversarial-excluded)
 [![LongMemEval](https://img.shields.io/badge/LongMemEval-92.0%25-2ea44f?style=for-the-badge)](RESULTS.md#longmemeval-overall-920)
-[![Answer model](https://img.shields.io/badge/answer%20model-gpt--5-1f6feb?style=for-the-badge)](METHODOLOGY.md)
+[![Recall latency](https://img.shields.io/badge/P50%20recall-~15ms-1f6feb?style=for-the-badge)](https://www.maximem.ai/synap)
+[![Models](https://img.shields.io/badge/models-gpt--5--mini-1f6feb?style=for-the-badge)](METHODOLOGY.md)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey?style=for-the-badge)](LICENSE)
 
 </div>
@@ -20,7 +23,7 @@
 | **LoCoMo** | **93.2%** | Cat 1-4; adversarial (Cat 5) excluded, per [industry convention](METHODOLOGY.md#scope-decisions) |
 | **LongMemEval** | **92.0%** | Full 500-question set |
 
-Answer model `gpt-5`, LLM-as-judge `gpt-5-mini`. Full category-level breakdown lives in **[RESULTS.md](RESULTS.md)**; full methodology, models, and the variables that move scores across vendors are in **[METHODOLOGY.md](METHODOLOGY.md)**.
+Both the answer model and the LLM-as-judge are `gpt-5-mini`. Full category-level breakdown lives in **[RESULTS.md](RESULTS.md)**; full methodology, models, and the variables that move scores across vendors are in **[METHODOLOGY.md](METHODOLOGY.md)**.
 
 ---
 
@@ -30,19 +33,19 @@ Memory benchmark scores are **highly sensitive to answer model, judge, ingestion
 
 | System | LongMemEval | Answer model | Source |
 |---|:---:|---|---|
-| **Synap** | **92.0%** | `gpt-5` | This repo |
+| **Synap** | **92.0%** | `gpt-5-mini` | This repo |
 | Supermemory | 85.2% | Gemini-3 Pro | [supermemory.ai/research](https://supermemory.ai/research) |
 | Supermemory | 84.6% | `gpt-5` | [supermemory.ai/research](https://supermemory.ai/research) |
 | Zep | 71.2% | `gpt-4o` | [arXiv:2501.13956](https://arxiv.org/abs/2501.13956) |
 | Mem0 | *not published* | n/a | n/a |
 | Letta (MemGPT) | *not published* | n/a | n/a |
 
-> **Like-for-like:** on the same answer model (`gpt-5`), Synap's **92.0%** leads Supermemory's **84.6%** by **+7.4 points**. Mem0 and Letta have not published LongMemEval results; both Zep and Supermemory have [publicly called on Mem0](METHODOLOGY.md#the-vendor-landscape) to evaluate on it.
+> **The lead comes from the memory layer, not a bigger model.** Synap reaches **92.0%** using `gpt-5-mini`, ahead of every published competitor result, including those generated with larger answer models (Supermemory's 85.2% on Gemini-3 Pro and 84.6% on `gpt-5`). Mem0 and Letta have not published LongMemEval results; both Zep and Supermemory have [publicly called on Mem0](METHODOLOGY.md#the-vendor-landscape) to evaluate on it.
 
 ```mermaid
 xychart-beta
     title "LongMemEval: Published Accuracy (vendor self-reported)"
-    x-axis ["Synap (gpt-5)", "Supermemory (Gemini-3)", "Supermemory (gpt-5)", "Zep (gpt-4o)"]
+    x-axis ["Synap (gpt-5-mini)", "Supermemory (Gemini-3)", "Supermemory (gpt-5)", "Zep (gpt-4o)"]
     y-axis "Accuracy (%)" 0 --> 100
     bar [92.0, 85.2, 84.6, 71.2]
 ```
@@ -77,9 +80,34 @@ See **[RESULTS.md](RESULTS.md)** for the official-distribution counts behind eac
 
 ---
 
+## About Synap
+
+Your AI agents forget everything between conversations. Synap fixes that with persistent memory and context that works **across sessions, channels, and months, not just the last twenty turns**, and it plugs into every popular agent framework.
+
+> Memory is not a storage problem alone. It is an active context-management problem. A vector database is not memory: retrieval finds text that *looks* similar, while memory maintains what is **true, current, and yours**.
+
+Synap is an agentic context-management system built around three functions:
+
+- **Capture what matters.** Structured extraction of facts, preferences, episodes, and temporal events, with entity resolution that maps "John", "John Smith", and "my manager" to one canonical record.
+- **Compact without signal loss.** Adaptive compaction keeps context lean as conversations grow, so cost does not balloon and quality does not rot.
+- **Recall when it is actually needed.** Context is pre-fetched before your agent asks, returning in **~15ms at P50**, fast enough to keep a voice agent conversational on a 300ms budget.
+
+It ships with **native multi-agent support** (not retrofitted) and **Intelligent & Automated Context Scoping (IACS)**, which isolates user-level context while preserving shared organizational knowledge.
+
+**Native framework integrations:** LangChain, LangGraph, LlamaIndex, CrewAI, Haystack, Google ADK, AutoGen, OpenAI Agents, Semantic Kernel, Pydantic AI, and more.
+
+**Learn more:** [Website](https://www.maximem.ai/synap) · [Docs](https://www.maximem.ai/docs) · [Dashboard](https://synap.maximem.ai) · [SDK](https://github.com/maximem-ai/maximem_synap_sdk) · [How it works](https://www.maximem.ai/blog/how-maximem-synap-works)
+
+```bash
+pip install maximem-synap          # Python
+npm install @maximem/synap-js-sdk  # JavaScript / TypeScript
+```
+
+---
+
 ## Methodology in brief
 
-- **Answer model:** `gpt-5`. **Judge:** binary CORRECT / WRONG, `gpt-5-mini`.
+- **Answer model:** `gpt-5-mini`. **Judge:** binary CORRECT / WRONG, `gpt-5-mini`.
 - **LongMemEval:** full 500-question set across 6 categories ([Wu et al., ICLR 2025](https://arxiv.org/abs/2410.10813)).
 - **LoCoMo:** Cat 1-4 only; adversarial (Cat 5) excluded, matching the convention used by mem0, Zep, and the original LoCoMo paper ([Maharana et al., ACL 2024](https://arxiv.org/abs/2402.17753)).
 
@@ -93,7 +121,7 @@ These results are produced with Maximem's open eval tooling against the **offici
 
 - **Harness:** [`maximem-ai/memory_and_context_eval_harness`](https://github.com/maximem-ai/memory_and_context_eval_harness)
 - **Datasets:** LongMemEval (`LongMemEval_S`, 500 Q) and LoCoMo (`locomo10`), official releases.
-- **Answer model:** `gpt-5`. **Judge model:** `gpt-5-mini` (binary CORRECT / WRONG).
+- **Answer model:** `gpt-5-mini`. **Judge model:** `gpt-5-mini` (binary CORRECT / WRONG).
 - **Scope:** LongMemEval full set; LoCoMo Cat 1-4 (adversarial Cat 5 excluded).
 
 Per-run artifacts (answers, retrieved context, judge verdicts) are maintained by the Maximem evaluation team and available on request.
@@ -104,7 +132,7 @@ Per-run artifacts (answers, retrieved context, judge verdicts) are maintained by
 
 | File | Contents |
 |---|---|
-| [`README.md`](README.md) | This overview: headlines, comparison, category tables. |
+| [`README.md`](README.md) | This overview: headlines, comparison, category tables, about Synap. |
 | [`RESULTS.md`](RESULTS.md) | Category-level breakdown with official-distribution counts. |
 | [`METHODOLOGY.md`](METHODOLOGY.md) | Models, scope decisions, and the cross-vendor config comparison. |
 | [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata. |
@@ -138,5 +166,5 @@ If you reference these numbers, please cite the repository (see [`CITATION.cff`]
 ---
 
 <div align="center">
-<sub>Maintained by <a href="https://github.com/maximem-ai">Maximem</a>. Synap is the memory layer for AI agents. <a href="https://github.com/maximem-ai/maximem_synap_sdk">Get the SDK</a>.</sub>
+<sub>Maintained by <a href="https://github.com/maximem-ai">Maximem</a>. Synap is the memory layer for production AI agents. <a href="https://github.com/maximem-ai/maximem_synap_sdk">Get the SDK</a>.</sub>
 </div>
