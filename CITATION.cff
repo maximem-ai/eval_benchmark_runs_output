@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+title: "Synap — Agent Memory Benchmark Results"
+message: "If you reference these benchmark results, please cite this repository and the underlying benchmarks (LongMemEval, LoCoMo)."
+type: dataset
+authors:
+  - name: "Maximem"
+    website: "https://github.com/maximem-ai"
+repository-code: "https://github.com/maximem-ai/eval_benchmark_runs_output"
+abstract: >-
+  Reproducible benchmark results for Maximem Synap, the memory layer for AI
+  agents. Synap scores 93.2% on LoCoMo (Cat 1-4, adversarial excluded) and
+  92.0% on the full 500-question LongMemEval set, with gpt-5 as the answer
+  model and gpt-5-mini as a binary LLM-as-judge.
+keywords:
+  - agent-memory
+  - long-term-memory
+  - LongMemEval
+  - LoCoMo
+  - benchmark
+  - retrieval
+license: CC-BY-4.0
+date-released: "2026-06-24"
+references:
+  - type: conference-paper
+    title: "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory"
+    year: 2025
+    notes: "ICLR 2025"
+    identifiers:
+      - type: other
+        value: "arXiv:2410.10813"
+  - type: conference-paper
+    title: "Evaluating Very Long-Term Conversational Memory of LLM Agents"
+    year: 2024
+    notes: "ACL 2024"
+    identifiers:
+      - type: other
+        value: "arXiv:2402.17753"
