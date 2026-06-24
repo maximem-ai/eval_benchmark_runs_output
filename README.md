@@ -1,11 +1,11 @@
 <div align="center">
 
-# Synap — Agent Memory Benchmark Results
+# Synap: Agent Memory Benchmark Results
 
-**Reproducible benchmark results for [Maximem Synap](https://github.com/maximem-ai/maximem_synap_sdk) — the memory layer that makes AI agents remember.**
+**Reproducible benchmark results for [Maximem Synap](https://github.com/maximem-ai/maximem_synap_sdk), the memory layer that makes AI agents remember.**
 
-[![LoCoMo](https://img.shields.io/badge/LoCoMo-93.2%25-2ea44f?style=for-the-badge)](RESULTS.md#locomo--overall-932-cat-14-adversarial-excluded)
-[![LongMemEval](https://img.shields.io/badge/LongMemEval-92.0%25-2ea44f?style=for-the-badge)](RESULTS.md#longmemeval--overall-920)
+[![LoCoMo](https://img.shields.io/badge/LoCoMo-93.2%25-2ea44f?style=for-the-badge)](RESULTS.md#locomo-overall-932-cat-1-4-adversarial-excluded)
+[![LongMemEval](https://img.shields.io/badge/LongMemEval-92.0%25-2ea44f?style=for-the-badge)](RESULTS.md#longmemeval-overall-920)
 [![Answer model](https://img.shields.io/badge/answer%20model-gpt--5-1f6feb?style=for-the-badge)](METHODOLOGY.md)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey?style=for-the-badge)](LICENSE)
 
@@ -17,16 +17,16 @@
 
 | Benchmark | Synap | Scope |
 |---|:---:|---|
-| **LoCoMo** | **93.2%** | Cat 1–4, adversarial (Cat 5) excluded — [industry convention](METHODOLOGY.md#scope-decisions) |
+| **LoCoMo** | **93.2%** | Cat 1-4; adversarial (Cat 5) excluded, per [industry convention](METHODOLOGY.md#scope-decisions) |
 | **LongMemEval** | **92.0%** | Full 500-question set |
 
-Answer model `gpt-5`, LLM-as-judge `gpt-5-mini`. Full category-level breakdown in **[RESULTS.md](RESULTS.md)**; full methodology, models, and the variables that move scores across vendors in **[METHODOLOGY.md](METHODOLOGY.md)**.
+Answer model `gpt-5`, LLM-as-judge `gpt-5-mini`. Full category-level breakdown lives in **[RESULTS.md](RESULTS.md)**; full methodology, models, and the variables that move scores across vendors are in **[METHODOLOGY.md](METHODOLOGY.md)**.
 
 ---
 
 ## How Synap compares
 
-Memory benchmark scores are **highly sensitive to answer model, judge, ingestion granularity, and prompt** — so a fair comparison fixes those variables and cites every number. The table below lists each system's **own published LongMemEval accuracy** alongside the answer model it used (the single largest score driver).
+Memory benchmark scores are **highly sensitive to answer model, judge, ingestion granularity, and prompt**, so a fair comparison fixes those variables and cites every number. The table below lists each system's **own published LongMemEval accuracy** alongside the answer model it used (the single largest score driver).
 
 | System | LongMemEval | Answer model | Source |
 |---|:---:|---|---|
@@ -34,14 +34,14 @@ Memory benchmark scores are **highly sensitive to answer model, judge, ingestion
 | Supermemory | 85.2% | Gemini-3 Pro | [supermemory.ai/research](https://supermemory.ai/research) |
 | Supermemory | 84.6% | `gpt-5` | [supermemory.ai/research](https://supermemory.ai/research) |
 | Zep | 71.2% | `gpt-4o` | [arXiv:2501.13956](https://arxiv.org/abs/2501.13956) |
-| Mem0 | *not published* | — | — |
-| Letta (MemGPT) | *not published* | — | — |
+| Mem0 | *not published* | n/a | n/a |
+| Letta (MemGPT) | *not published* | n/a | n/a |
 
-> **Like-for-like:** on the same answer model (`gpt-5`), Synap's **92.0%** leads Supermemory's **84.6%** by **+7.4 points**. Mem0 and Letta have not published LongMemEval results — both Zep and Supermemory have [publicly called on Mem0](METHODOLOGY.md#the-vendor-landscape) to evaluate on it.
+> **Like-for-like:** on the same answer model (`gpt-5`), Synap's **92.0%** leads Supermemory's **84.6%** by **+7.4 points**. Mem0 and Letta have not published LongMemEval results; both Zep and Supermemory have [publicly called on Mem0](METHODOLOGY.md#the-vendor-landscape) to evaluate on it.
 
 ```mermaid
 xychart-beta
-    title "LongMemEval — Published Accuracy (vendor self-reported)"
+    title "LongMemEval: Published Accuracy (vendor self-reported)"
     x-axis ["Synap (gpt-5)", "Supermemory (Gemini-3)", "Supermemory (gpt-5)", "Zep (gpt-4o)"]
     y-axis "Accuracy (%)" 0 --> 100
     bar [92.0, 85.2, 84.6, 71.2]
@@ -51,7 +51,7 @@ xychart-beta
 
 ## Results by category
 
-### LongMemEval — 92.0% (460 / 500)
+### LongMemEval: 92.0% (460 / 500)
 
 | Category | Synap | Correct / n |
 |---|:---:|:---:|
@@ -63,7 +63,7 @@ xychart-beta
 | multi-session | 75.2% | 100 / 133 |
 | **Overall** | **92.0%** | **460 / 500** |
 
-### LoCoMo — 93.2% (Cat 1–4, adversarial excluded)
+### LoCoMo: 93.2% (Cat 1-4, adversarial excluded)
 
 | Category | Synap |
 |---|:---:|
@@ -77,24 +77,24 @@ See **[RESULTS.md](RESULTS.md)** for the official-distribution counts behind eac
 
 ---
 
-## Methodology — in brief
+## Methodology in brief
 
-- **Answer model:** `gpt-5` · **Judge:** binary CORRECT / WRONG, `gpt-5-mini`
+- **Answer model:** `gpt-5`. **Judge:** binary CORRECT / WRONG, `gpt-5-mini`.
 - **LongMemEval:** full 500-question set across 6 categories ([Wu et al., ICLR 2025](https://arxiv.org/abs/2410.10813)).
-- **LoCoMo:** Cat 1–4 only — adversarial (Cat 5) excluded, matching the convention used by mem0, Zep, and the original LoCoMo paper ([Maharana et al., ACL 2024](https://arxiv.org/abs/2402.17753)).
+- **LoCoMo:** Cat 1-4 only; adversarial (Cat 5) excluded, matching the convention used by mem0, Zep, and the original LoCoMo paper ([Maharana et al., ACL 2024](https://arxiv.org/abs/2402.17753)).
 
-Full details — datasets, scope decisions, and a side-by-side of *why vendor scores differ* (eval-LLM, judge, embedder, reranker, ingestion granularity, prompt, adversarial handling, run variance) — are in **[METHODOLOGY.md](METHODOLOGY.md)**.
+Full details (datasets, scope decisions, and a side-by-side of *why vendor scores differ*: eval-LLM, judge, embedder, reranker, ingestion granularity, prompt, adversarial handling, run variance) are in **[METHODOLOGY.md](METHODOLOGY.md)**.
 
 ---
 
 ## Reproducibility
 
-These results are produced with Maximem's open eval tooling against the **official public dataset distributions** — no custom subsets or relabeling:
+These results are produced with Maximem's open eval tooling against the **official public dataset distributions**, with no custom subsets or relabeling:
 
 - **Harness:** [`maximem-ai/memory_and_context_eval_harness`](https://github.com/maximem-ai/memory_and_context_eval_harness)
 - **Datasets:** LongMemEval (`LongMemEval_S`, 500 Q) and LoCoMo (`locomo10`), official releases.
-- **Answer model:** `gpt-5` · **Judge model:** `gpt-5-mini` (binary CORRECT / WRONG).
-- **Scope:** LongMemEval full set; LoCoMo Cat 1–4 (adversarial Cat 5 excluded).
+- **Answer model:** `gpt-5`. **Judge model:** `gpt-5-mini` (binary CORRECT / WRONG).
+- **Scope:** LongMemEval full set; LoCoMo Cat 1-4 (adversarial Cat 5 excluded).
 
 Per-run artifacts (answers, retrieved context, judge verdicts) are maintained by the Maximem evaluation team and available on request.
 
@@ -104,7 +104,7 @@ Per-run artifacts (answers, retrieved context, judge verdicts) are maintained by
 
 | File | Contents |
 |---|---|
-| [`README.md`](README.md) | This overview — headlines, comparison, category tables. |
+| [`README.md`](README.md) | This overview: headlines, comparison, category tables. |
 | [`RESULTS.md`](RESULTS.md) | Category-level breakdown with official-distribution counts. |
 | [`METHODOLOGY.md`](METHODOLOGY.md) | Models, scope decisions, and the cross-vendor config comparison. |
 | [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata. |
@@ -138,5 +138,5 @@ If you reference these numbers, please cite the repository (see [`CITATION.cff`]
 ---
 
 <div align="center">
-<sub>Maintained by <a href="https://github.com/maximem-ai">Maximem</a> · Synap is the memory layer for AI agents — <a href="https://github.com/maximem-ai/maximem_synap_sdk">get the SDK</a>.</sub>
+<sub>Maintained by <a href="https://github.com/maximem-ai">Maximem</a>. Synap is the memory layer for AI agents. <a href="https://github.com/maximem-ai/maximem_synap_sdk">Get the SDK</a>.</sub>
 </div>

@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "Synap — Agent Memory Benchmark Results"
+title: "Synap: Agent Memory Benchmark Results"
 message: "If you reference these benchmark results, please cite this repository and the underlying benchmarks (LongMemEval, LoCoMo)."
 type: dataset
 authors:
