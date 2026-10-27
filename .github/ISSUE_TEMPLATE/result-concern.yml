@@ -1,0 +1,11 @@
+name: Result or method concern
+description: A number looks wrong, or the setup is unfair
+labels: [methodology]
+body:
+  - type: textarea
+    id: what
+    attributes: {label: What looks wrong, description: Which number or method}
+    validations: {required: true}
+  - type: textarea
+    id: evidence
+    attributes: {label: What you ran, description: Config, models, scores, links}

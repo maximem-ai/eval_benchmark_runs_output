@@ -1,0 +1,12 @@
+name: Re-run report
+description: Share your own re-run of a benchmark
+labels: [rerun]
+body:
+  - type: input
+    id: bench
+    attributes: {label: Benchmark and scope}
+    validations: {required: true}
+  - type: textarea
+    id: result
+    attributes: {label: Config, models and scores}
+    validations: {required: true}
