@@ -1,0 +1,50 @@
+{
+  "metric": "Recall@20: share of questions where GPT-4o judges at least one of the first 20 retrieved memories relevant to the question and gold answer (an LLM-judged retrieval hit rate)",
+  "scope": "Abstention questions are excluded",
+  "judge_model": "gpt-4o",
+  "prompt_version": "memorybench-retrieval-eval-v1",
+  "retrieval_run_date": "2026-10-13",
+  "relevance_labeling_date": "2026-10-25",
+  "questions": 470,
+  "hits": 461,
+  "recall_at_20": 0.9809,
+  "error_questions": 0,
+  "categories": {
+    "knowledge-update": {
+      "questions": 72,
+      "hits": 71,
+      "recall_at_20": 0.9861
+    },
+    "multi-session": {
+      "questions": 121,
+      "hits": 119,
+      "recall_at_20": 0.9835
+    },
+    "single-session-assistant": {
+      "questions": 56,
+      "hits": 55,
+      "recall_at_20": 0.9821
+    },
+    "single-session-preference": {
+      "questions": 30,
+      "hits": 29,
+      "recall_at_20": 0.9667
+    },
+    "single-session-user": {
+      "questions": 64,
+      "hits": 64,
+      "recall_at_20": 1
+    },
+    "temporal-reasoning": {
+      "questions": 127,
+      "hits": 123,
+      "recall_at_20": 0.9685
+    }
+  },
+  "excluded_abstention": {
+    "questions": 30,
+    "hits": 19,
+    "note": "Reported for completeness only. Not part of the headline."
+  },
+  "records_file": "retrieval_relevance_gpt4o_top20.jsonl"
+}
