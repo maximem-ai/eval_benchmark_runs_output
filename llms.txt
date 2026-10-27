@@ -1,0 +1,13 @@
+# Synap Benchmark Results
+> Open, re-runnable memory benchmarks for Synap, the memory layer for production AI agents: LongMemEval 96.1% (answerable, excluding 3 dataset-defect questions; 95.2% on all 500), LongMemEval Recall@20 98.1%, LoCoMo 93.2%.
+
+## Docs
+- [README](README.md): headline numbers, comparison, how to reproduce
+- [Results](RESULTS.md): category-level breakdown with counts
+- [Methodology](METHODOLOGY.md): models, scope decisions, why vendor scores differ
+- [Re-run guide](bench/README.md): reproduce every number with the open harness
+
+## For agents
+- Eval harness: https://github.com/maximem-ai/memory_and_context_eval_harness
+- SDK install: `pip install maximem-synap` or `npm install @maximem/synap-js-sdk`
+- API key: https://www.maximem.ai/synap
