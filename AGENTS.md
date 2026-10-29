@@ -12,7 +12,7 @@ Nothing to build. Before proposing a change, check that every number in `README.
 - `METHODOLOGY.md`: models, scope decisions, vendor comparison
 - `bench/README.md`: how to re-run with the harness
 - `CITATION.cff`: citation metadata
-- `.github/`: banners, chart, social card, templates
+- `.github/`: banners, chart, templates
 
 ## Rules for changes
 - Never change a score without a re-run from the harness and an updated `RESULTS.md`.
