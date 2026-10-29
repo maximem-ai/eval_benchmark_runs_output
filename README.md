@@ -17,11 +17,11 @@
 </p>
 
 <p align="center">
-  <a href="RESULTS.md#longmemeval-answerable-excluding-3-dataset-defect-questions-961"><img src="https://img.shields.io/badge/LongMemEval%20%28answerable%2C%20excl.%203%20defects%29-96.1%25-f26522?style=flat-square" alt="LongMemEval 96.1% on answerable questions, excluding 3 dataset-defect questions"></a>
-  <a href="RESULTS.md#longmemeval-overall-952"><img src="https://img.shields.io/badge/LongMemEval%20%28all%20500%29-95.2%25-f26522?style=flat-square" alt="LongMemEval 95.2% on all 500 questions"></a>
+  <a href="RESULTS.md#longmemeval-overall-956"><img src="https://img.shields.io/badge/LongMemEval%20%28all%20500%29-95.6%25-f26522?style=flat-square" alt="LongMemEval 95.6% on all 500 questions"></a>
+  <a href="RESULTS.md#longmemeval-answerable-questions-957"><img src="https://img.shields.io/badge/LongMemEval%20%28answerable%29-95.7%25-f26522?style=flat-square" alt="LongMemEval 95.7% on answerable questions"></a>
   <a href="RESULTS.md#longmemeval-retrieval-recall20-981"><img src="https://img.shields.io/badge/LongMemEval%20Recall%4020-98.1%25-f26522?style=flat-square" alt="LongMemEval Recall@20 98.1%"></a>
   <a href="RESULTS.md#locomo-overall-932-cat-1-4-adversarial-excluded"><img src="https://img.shields.io/badge/LoCoMo-93.2%25-f26522?style=flat-square" alt="LoCoMo 93.2%"></a>
-  <a href="METHODOLOGY.md"><img src="https://img.shields.io/badge/LongMemEval%20answer%20%2F%20judge-gpt--5.4%20%2F%20gpt--4o-3f3f46?style=flat-square" alt="LongMemEval: gpt-5.4 answer model, gpt-4o judge"></a>
+  <a href="METHODOLOGY.md"><img src="https://img.shields.io/badge/LongMemEval%20answer%20%2F%20judge-gemini--3.8--flash%20%2F%20gpt--4o-3f3f46?style=flat-square" alt="LongMemEval: gemini-3.8-flash answer model, gpt-4o judge"></a>
   <a href="METHODOLOGY.md"><img src="https://img.shields.io/badge/LoCoMo%20answer%20%2F%20judge-gpt--5--mini%20%2F%20gpt--5--mini-3f3f46?style=flat-square" alt="LoCoMo: gpt-5-mini answer model and judge"></a>
   <a href="https://github.com/maximem-ai/memory_and_context_eval_harness"><img src="https://img.shields.io/badge/harness-open%20source-3f3f46?style=flat-square" alt="Open-source harness"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC%20BY%204.0-3f3f46?style=flat-square" alt="License CC BY 4.0"></a>
@@ -35,17 +35,12 @@ This repository publishes the benchmark results for [Maximem Synap](https://www.
 
 | Benchmark | Maximem Synap | Run date | Questions | Answer model / judge | What is published |
 |---|:---:|---|---|---|---|
-| **LongMemEval** (answerable, excluding 3 dataset-defect questions) | **96.1%** (449 / 467) | 2026-10-13 | 467 of the 500, variant `LongMemEval_S` | `gpt-5.4` / `gpt-4o` | The 3 excluded questions, with quotes ([details](results/longmemeval/DATASET_DEFECTS.md)) |
-| **LongMemEval** (answerable questions) | 95.5% (449 / 470) | 2026-10-13 | 470 of the 500 (30 abstention questions excluded) | `gpt-5.4` / `gpt-4o` | Same records as below |
-| **LongMemEval** (all 500 questions) | 95.2% (476 / 500) | 2026-10-13 | 500, variant `LongMemEval_S` | `gpt-5.4` / `gpt-4o` | Every question: retrieved memories, answer and judge verdict ([data](results/longmemeval/)) |
+| **LongMemEval** (all 500 questions) | **95.6%** (478 / 500) | October 2026 | 500, variant `LongMemEval_S` | `gemini-3.8-flash` / `gpt-4o` | Every question: retrieved memories, answer and judge verdict ([data](results/longmemeval/question_records_gemini-3.8-flash.json)) |
+| **LongMemEval** (answerable questions) | 95.7% (450 / 470) | October 2026 | 470 of the 500 (30 abstention questions excluded) | `gemini-3.8-flash` / `gpt-4o` | Same records |
 | **LongMemEval retrieval** (Recall@20) | **98.1%** (461 / 470) | 2026-10-13 (retrieval), 2026-10-25 (relevance labels) | 470, abstention excluded | no answer model / `gpt-4o` relevance judge | Per-question relevance labels ([data](results/longmemeval/retrieval_relevance_gpt4o_top20.jsonl)) |
 | **LoCoMo** | **93.2%** | 2026-06-20 | 1,540, Cat 1-4 (adversarial Cat 5 excluded, [why](METHODOLOGY.md#scope-decisions)) | `gpt-5-mini` / `gpt-5-mini` | Category scores ([RESULTS.md](RESULTS.md)) |
 
-LongMemEval was run on 2026-10-13. **In April our LongMemEval score was 92.0%. It is now 95.2% on all 500 questions, 95.5% on the 470 answerable questions, and 96.1% on answerable questions excluding 3 with dataset defects.** The judge, `gpt-4o`, is the one LongMemEval's own evaluation script uses. Category breakdowns are [below](#results-by-category).
-
-### About the 96.1%
-
-Three questions in LongMemEval_S have gold answers that the conversations do not support. We answered all three wrong, and we excluded only those three. Each of the three is explained with quotes in [`DATASET_DEFECTS.md`](results/longmemeval/DATASET_DEFECTS.md), and one of them is marked arguable. The comparison with other vendors below uses the all-500 score, since that is what they report.
+LongMemEval was run in October 2026. **In April our LongMemEval score was 92.0%. It is now 95.6% on all 500 questions and 95.7% on the 470 answerable questions.** The judge, `gpt-4o`, is the one LongMemEval's own evaluation script uses. Category breakdowns are [below](#results-by-category).
 
 ### Retrieval: Recall@20
 
@@ -60,27 +55,23 @@ These are benchmark scores on standard datasets published by independent researc
 The score comes straight from the published records. You need [`jq`](https://jqlang.github.io/jq/).
 
 ```bash
-# Correct answers out of 500 (prints 476)
+# Correct answers out of 500 (prints 478)
 jq '[.[] | select(.judge.judge_raw | ascii_downcase | startswith("yes"))] | length' \
-  results/longmemeval/question_records.json
+  results/longmemeval/question_records_gemini-3.8-flash.json
 
 # Correct / total for each question type
 jq -r 'group_by(.question_type)[] | "\(.[0].question_type)\t\([.[] | select(.judge.judge_raw | ascii_downcase | startswith("yes"))] | length) / \(length)"' \
-  results/longmemeval/question_records.json
+  results/longmemeval/question_records_gemini-3.8-flash.json
 ```
 
 A question counts as correct when the judge's reply starts with "yes". The verdicts are the judge model's output as recorded.
 
-The other two LongMemEval scores come from the same records, using the list of excluded questions:
+The answerable score comes from the same records:
 
 ```bash
-# Answerable questions (abstention excluded): prints {"correct":449,"total":470}
+# Answerable questions (abstention excluded): prints {"correct":450,"total":470}
 jq -c '[.[] | select(.retrieval.abstention | not)] | {correct: (map(select(.judge.judge_raw | ascii_downcase | startswith("yes"))) | length), total: length}' \
-  results/longmemeval/question_records.json
-
-# Answerable, excluding the 3 defect questions: prints {"correct":449,"total":467}
-jq -c --slurpfile d results/longmemeval/dataset_defects.json '($d[0].defects | map(.question_id)) as $x | [.[] | select(.retrieval.abstention | not) | select(.question_id as $i | ($x | index($i)) | not)] | {correct: (map(select(.judge.judge_raw | ascii_downcase | startswith("yes"))) | length), total: length}' \
-  results/longmemeval/question_records.json
+  results/longmemeval/question_records_gemini-3.8-flash.json
 ```
 
 Recall@20 comes from the published relevance labels:
@@ -95,11 +86,11 @@ jq -s -c '[.[] | select(.abstention | not)] | {questions: length, hits: (map(sel
 
 | Path | Contents |
 |---|---|
-| [`results/longmemeval/question_records.json`](results/longmemeval/question_records.json) | One record per LongMemEval question (500) |
+| [`results/longmemeval/question_records_gemini-3.8-flash.json`](results/longmemeval/question_records_gemini-3.8-flash.json) | One record per LongMemEval question (500), latest run (answer model `gemini-3.8-flash`) |
+| [`results/longmemeval/manifest_gemini-3.8-flash.json`](results/longmemeval/manifest_gemini-3.8-flash.json) | Dataset variant, models, run date and prompt settings for the latest run |
+| [`results/longmemeval/question_records.json`](results/longmemeval/question_records.json) | The same 500 questions from an earlier run (answer model `gpt-5.4`) |
+| [`results/longmemeval/manifest.json`](results/longmemeval/manifest.json) | Settings for the earlier run |
 | [`results/longmemeval/LME_answering_prompt.md`](results/longmemeval/LME_answering_prompt.md) | The prompt the answer model received |
-| [`results/longmemeval/DATASET_DEFECTS.md`](results/longmemeval/DATASET_DEFECTS.md) | The 3 questions excluded from the adjusted score, with quotes |
-| [`results/longmemeval/dataset_defects.json`](results/longmemeval/dataset_defects.json) | The same list as data, with scores |
-| [`results/longmemeval/manifest.json`](results/longmemeval/manifest.json) | Dataset variant, models, run date and prompt settings |
 | [`results/longmemeval/retrieval_relevance_gpt4o_top20.jsonl`](results/longmemeval/retrieval_relevance_gpt4o_top20.jsonl) | GPT-4o relevance label (1 or 0) for each of the first 20 retrieved memories, per question |
 | [`results/longmemeval/retrieval_relevance_gpt4o_top20.summary.json`](results/longmemeval/retrieval_relevance_gpt4o_top20.summary.json) | Recall@20 totals and per-category breakdown |
 | [`RESULTS.md`](RESULTS.md) | Category-level breakdown |
@@ -110,7 +101,7 @@ jq -s -c '[.[] | select(.abstention | not)] | {questions: length, hits: (map(sel
 <details>
 <summary><b>Record format</b></summary>
 
-Each record in `question_records.json` has these fields:
+Each record in the `question_records` files has these fields:
 
 | Field | Meaning |
 |---|---|
@@ -123,7 +114,7 @@ Each record in `question_records.json` has these fields:
 
 The harness left these fields empty or zero: `answer_system`, `judge_system`, `error`, `judge_prompt_tokens` and `judge_completion_tokens`. The timing and answer token fields describe the harness run, not Maximem Synap.
 
-The question text, gold answers and chat excerpts in `question_records.json` come from LongMemEval and remain under its own licence.
+The question text, gold answers and chat excerpts in the `question_records` files come from LongMemEval and remain under its own licence.
 
 </details>
 
@@ -133,33 +124,43 @@ The question text, gold answers and chat excerpts in `question_records.json` com
 
 The table lists each vendor's **own published** LongMemEval number next to the answer model it used.
 
-| System | LongMemEval accuracy | Recall@20 | Answer model | Source |
-|---|:---:|:---:|---|---|
-| **Maximem Synap** (answerable, excluding 3 dataset-defect questions) | **96.1%** | **98.1%** | `gpt-5.4` | This repo (full records published) |
-| **Maximem Synap** (answerable questions) | 95.5% | same | `gpt-5.4` | This repo |
-| **Maximem Synap** (all 500 questions) | 95.2% | same | `gpt-5.4` | This repo |
-| Mem0 | 94.4% | not published | not stated | [docs.mem0.ai](https://docs.mem0.ai/core-concepts/memory-evaluation) (managed platform) |
-| EverMind | 94.0% | not found | not stated | [evermind.ai](https://evermind.ai/) (no method given on the page) |
-| Hindsight (Vectorize) | 91.4% | 94.6%† | Gemini 3 Pro Preview | [accuracy: press release, Dec 2025](https://www.prnewswire.com/news-releases/vectorize-breaks-90-on-longmemeval-with-open-source-ai-agent-memory-system-302643146.html), [retrieval: vectorize.io/benchmarks](https://vectorize.io/benchmarks) |
-| Honcho | 90.4% | not published | Claude Haiku 4.5 | [honcho.dev/evals](https://honcho.dev/evals/) (92.6% with Gemini 3 Pro) |
-| Zep | 90.2% | not published | `gpt-5.4` | [getzep.com/research](https://www.getzep.com/research/) (earlier paper: 71.2% with `gpt-4o`) |
-| Supermemory | 85.2% | 97% | Gemini-3 Pro | [supermemory.ai/research](https://supermemory.ai/research/longmembench/) (accuracy is an earlier figure; its current page reports Recall@20 with aggregation) |
-| Letta (MemGPT) | no first-party score found | not published | n/a | n/a |
+| System | LongMemEval accuracy | Recall@20 | Answer model | Context tokens* | Source |
+|---|:---:|:---:|---|:---:|---|
+| **Maximem Synap** (all 500 questions) | **95.6%** | **98.1%** | `gemini-3.8-flash` | ~1x | This repo (full records published) |
+| **Maximem Synap** (answerable questions) | 95.7% | same | `gemini-3.8-flash` | ~1x | This repo |
+| Mastra | 94.87% | not published | `gpt-5-mini` | 4.1x | [mastra.ai/research/observational-memory](https://mastra.ai/research/observational-memory) (LongMemEval-S, `gpt-4o` judge) |
+| Hindsight (Vectorize) | 94.6% | not published | Gemini 3 Pro Preview | ~6x | [agentmemorybenchmark.ai](https://agentmemorybenchmark.ai/dataset/longmemeval) (473 / 500 correct, Gemini answer and judge; the Dec 2025 paper reports 91.4% with Gemini 3 Pro Preview) |
+| Mem0 | 94.4% | not published | not stated | ~1x | [docs.mem0.ai](https://docs.mem0.ai/core-concepts/memory-evaluation) (managed platform) |
+| EverMind | 94.0% | not found | not stated | not found | [evermind.ai](https://evermind.ai/) (no method given on the page) |
+| Honcho | 90.4% | not published | Claude Haiku 4.5 | 1.6x | [honcho.dev/evals](https://honcho.dev/evals/) (92.6% with Gemini 3 Pro) |
+| Zep | 90.2% | not published | `gpt-5.4` | 0.6x | [getzep.com/research](https://www.getzep.com/research/) (earlier paper: 71.2% with `gpt-4o`) |
+| Supermemory | 85.2% | 97% | Gemini-3 Pro | not published | [supermemory.ai/research](https://supermemory.ai/research/longmembench/) (accuracy is an earlier figure; its current page reports Recall@20 with aggregation) |
+| Letta (MemGPT) | no first-party score found | not published | n/a | n/a | n/a |
 
-\* Numbers for other vendors are vendor-reported and have not been verified by us. They report all 500 questions, so only the all-500 Maximem Synap row is like for like with them.
+\* Median number of context tokens provided, for a ~115K-token original context; x = ~7K.
 
-**Recall@20** is an LLM-judged retrieval hit rate, computed on the 470 non-abstention questions, so it is the same on all three Maximem Synap rows: a question counts as a hit when GPT-4o judges at least one of the first 20 retrieved memories relevant to the question and its gold answer, with abstention questions excluded. Our figure uses the public [MemoryBench](https://github.com/supermemoryai/memorybench) relevance prompt, and Supermemory's 97% is its own Recall@20 with aggregation. "Not published" means the vendor's LongMemEval page reports no retrieval metric (checked 2026-10-27).
+\*\* Numbers for other vendors are vendor-reported and have not been verified by us. They report all 500 questions, so only the all-500 Maximem Synap row is like for like with them.
 
-† Hindsight labels 94.6% "retrieval accuracy" and does not publish its definition or retrieval depth, so it may not be comparable to Recall@20.
+**Recall@20** is an LLM-judged retrieval hit rate, computed on the 470 non-abstention questions, so it is the same on both Maximem Synap rows: a question counts as a hit when GPT-4o judges at least one of the first 20 retrieved memories relevant to the question and its gold answer, with abstention questions excluded. Our figure uses the public [MemoryBench](https://github.com/supermemoryai/memorybench) relevance prompt, and Supermemory's 97% is its own Recall@20 with aggregation. "Not published" means the vendor's LongMemEval page reports no retrieval metric (checked 2026-10-27).
 
 <p align="center">
   <picture>
     <source media="(prefers-reduced-motion: reduce)" srcset=".github/chart-static.png">
-    <img src=".github/chart-animated.gif" alt="LongMemEval accuracy as published by each vendor: Maximem Synap 96.1 (answerable, excluding 3 defects), 95.5 (answerable) and 95.2 (all 500), Mem0 94.4, EverMind 94.0, Hindsight 91.4, Honcho 90.4, Zep 90.2, Supermemory 85.2" width="720">
+    <img src=".github/chart-animated.gif" alt="LongMemEval accuracy as published by each vendor: Maximem Synap 95.6 (all 500), Mastra 94.87, Hindsight 94.6, Mem0 94.4, Honcho 90.4, Zep 90.2, Supermemory 85.2" width="720">
   </picture>
 </p>
 
-Answer models, judges and prompts differ between vendors, so read this as context, not a controlled comparison. The chart axis starts at 90% to make small gaps visible, so bar lengths are not proportional to scores; the table above has the exact numbers. Why scores differ: [METHODOLOGY.md](METHODOLOGY.md#why-vendor-scores-differ).
+Answer models, judges and prompts differ between vendors, so read this as context, not a controlled comparison. Why scores differ: [METHODOLOGY.md](METHODOLOGY.md#why-vendor-scores-differ).
+
+### Maximem Synap with other answer models
+
+Runs with different answer models, all judged by `gpt-4o`.
+
+| Answer model | All 500 | Answerable (470) |
+|---|:---:|:---:|
+| Gemini 3.8 Flash (headline) | **95.6%** (478) | 95.7% (450) |
+| `gpt-5.4` | 95.2% (476) | 95.5% (449) |
+| Gemini 4 Argon | 97.0% (485) | 96.8% (455) |
 
 ### LoCoMo
 
@@ -168,7 +169,7 @@ LoCoMo claims use different scopes, metrics and model stacks. The scope and metr
 | System | LoCoMo | Scope and metric | Answer model / judge | Source |
 |---|:---:|---|---|---|
 | **Maximem Synap** | **93.2%** | 1,540 questions; answer accuracy | `gpt-5-mini` / `gpt-5-mini` | This repo ([method](METHODOLOGY.md#our-configuration)) |
-| Hindsight (Vectorize) | 92.0% | Retrieval accuracy; subset not stated | not stated | [vectorize.io/benchmarks](https://vectorize.io/benchmarks) |
+| Hindsight (Vectorize) | 92.0% | 1,540 questions (1,417 correct); answer accuracy | Gemini (version not stated) | [agentmemorybenchmark.ai](https://agentmemorybenchmark.ai/dataset/locomo) |
 | Mem0 | 92.5% | 1,540 questions; answer accuracy | `gpt-4o` / `gpt-4o` | [mem0.ai/research](https://mem0.ai/research) |
 | EverMind | 94.74% | Homepage claim; its detailed post separately reports 94.42% micro answer accuracy across 1,540 questions | not stated for the homepage figure | [evermind.ai](https://evermind.ai/) |
 | Honcho | 89.9% | 1,540 questions; answer accuracy | Claude Haiku 4.5; other pipeline models disclosed by vendor | [honcho.dev/evals](https://honcho.dev/evals/) |
@@ -187,45 +188,33 @@ LoCoMo claims use different scopes, metrics and model stacks. The scope and metr
 ## Results by category
 
 <details open>
-<summary><b>LongMemEval: 96.1% answerable excluding 3 defects, 95.5% answerable, 95.2% all 500</b></summary>
+<summary><b>LongMemEval: 95.6% all 500 questions, 95.7% answerable</b></summary>
 
-**Answerable, excluding the 3 dataset-defect questions: 96.1% (449 / 467)**
-
-| Category | Maximem Synap | Correct / n |
-|---|:---:|:---:|
-| single-session-user | **100.0%** | 64 / 64 |
-| knowledge-update | 98.6% | 71 / 72 |
-| temporal-reasoning | 96.9% | 123 / 127 |
-| single-session-preference | 96.7% | 29 / 30 |
-| single-session-assistant | 96.4% | 54 / 56 |
-| multi-session | 91.5% | 108 / 118 |
-| **Overall** | **96.1%** | **449 / 467** |
-
-**Answerable questions (30 abstention questions excluded): 95.5% (449 / 470)**
+**All 500 questions: 95.6% (478 / 500)**
 
 | Category | Maximem Synap | Correct / n |
 |---|:---:|:---:|
-| single-session-user | **100.0%** | 64 / 64 |
-| knowledge-update | 98.6% | 71 / 72 |
-| temporal-reasoning | 96.9% | 123 / 127 |
-| single-session-preference | 96.7% | 29 / 30 |
-| single-session-assistant | 96.4% | 54 / 56 |
-| multi-session | 89.3% | 108 / 121 |
-| **Overall** | **95.5%** | **449 / 470** |
-
-**All 500 questions: 95.2% (476 / 500)**
-
-| Category | Maximem Synap | Correct / n |
-|---|:---:|:---:|
-| single-session-user | **100.0%** | 70 / 70 |
+| temporal-reasoning | **97.7%** | 130 / 133 |
 | knowledge-update | 97.4% | 76 / 78 |
-| temporal-reasoning | 97.0% | 129 / 133 |
 | single-session-preference | 96.7% | 29 / 30 |
 | single-session-assistant | 96.4% | 54 / 56 |
-| multi-session | 88.7% | 118 / 133 |
-| **Overall** | **95.2%** | **476 / 500** |
+| single-session-user | 95.7% | 67 / 70 |
+| multi-session | 91.7% | 122 / 133 |
+| **Overall** | **95.6%** | **478 / 500** |
 
-Multi-session is the one category where we have most headroom to improve. All 3 excluded defect questions are in multi-session, so it is the only category whose score changes between the first two tables.
+**Answerable questions (30 abstention questions excluded): 95.7% (450 / 470)**
+
+| Category | Maximem Synap | Correct / n |
+|---|:---:|:---:|
+| temporal-reasoning | **97.6%** | 124 / 127 |
+| knowledge-update | 97.2% | 70 / 72 |
+| single-session-preference | 96.7% | 29 / 30 |
+| single-session-assistant | 96.4% | 54 / 56 |
+| single-session-user | 95.3% | 61 / 64 |
+| multi-session | 92.6% | 112 / 121 |
+| **Overall** | **95.7%** | **450 / 470** |
+
+Multi-session is the one category where we have most headroom to improve.
 
 **Recall@20 by category** (abstention excluded)
 
@@ -277,7 +266,7 @@ python scripts/download_datasets.py --variant s
 python -m runner.server                    # dashboard at http://localhost:8766
 ```
 
-In the dashboard, pick the Maximem Synap provider and set the orchestrator config to the models used for each benchmark: `gpt-5.4` (answer) and `gpt-4o` (judge) for LongMemEval, `gpt-5-mini` for both on LoCoMo. Step-by-step notes and settings are in [bench/README.md](bench/README.md).
+In the dashboard, pick the Maximem Synap provider and set the orchestrator config to the models used for each benchmark: `gemini-3.8-flash` (answer) and `gpt-4o` (judge) for LongMemEval, `gpt-5-mini` for both on LoCoMo. Step-by-step notes and settings are in [bench/README.md](bench/README.md).
 
 ---
 

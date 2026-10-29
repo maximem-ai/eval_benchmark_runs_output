@@ -41,11 +41,11 @@ Cat 1-4 distribution:
 
 | Variable | Value |
 |---|---|
-| LongMemEval answer-generation model | `gpt-5.4` |
+| LongMemEval answer-generation model | `gemini-3.8-flash` |
 | LongMemEval judge model | `gpt-4o` |
 | LongMemEval judge protocol | Binary yes / no against the gold answer, using LongMemEval's per-question-type judge prompts (`evaluate_qa.py`) |
-| LongMemEval run date | 2026-10-13 |
-| LongMemEval scoring views | All 500 questions (476 correct); answerable questions, 30 abstention excluded (449 / 470); answerable excluding 3 dataset-defect questions (449 / 467). The 3 excluded questions are explained in [`results/longmemeval/DATASET_DEFECTS.md`](results/longmemeval/DATASET_DEFECTS.md). |
+| LongMemEval run date | October 2026 |
+| LongMemEval scoring views | All 500 questions (478 correct); answerable questions, 30 abstention excluded (450 / 470) |
 | LongMemEval retrieval metric | Recall@20: share of questions where `gpt-4o` judges at least one of the first 20 retrieved memories relevant to the question and gold answer. Abstention questions are excluded (470 questions). Retrieval run 2026-10-13, labels produced 2026-10-25 with the MemoryBench relevance prompt |
 | LongMemEval answering prompt | [`results/longmemeval/LME_answering_prompt.md`](results/longmemeval/LME_answering_prompt.md), run with source-evidence chunks and memory metadata on, plus a `## Current date` section holding the question date |
 | LongMemEval scope | Full 500-question set, all 6 categories |
@@ -67,7 +67,7 @@ Cat 1-4 distribution:
 
 ## Why vendor scores differ
 
-The single most important thing to understand about agent-memory leaderboards is that **the configuration moves the score as much as the system does.** Supermemory's own results move from 81.6% to 85.2% on LongMemEval *just by switching the answer model*. Synap's 95.2% uses `gpt-5.4` as the answer model and `gpt-4o` as the judge. The judge matches the one Supermemory and Zep report, but the answer model differs from every competitor's, so the comparison is not like for like. Below is a side-by-side of the variables that matter, compiled from each vendor's published papers, blogs, and evaluation code.
+The single most important thing to understand about agent-memory leaderboards is that **the configuration moves the score as much as the system does.** Supermemory's own results move from 81.6% to 85.2% on LongMemEval *just by switching the answer model*. Synap's 95.6% uses `gemini-3.8-flash` as the answer model and `gpt-4o` as the judge. The judge matches the one Supermemory and Mastra report, but the answer model differs from every competitor's, so the comparison is not like for like. Below is a side-by-side of the variables that matter, compiled from each vendor's published papers, blogs, and evaluation code.
 
 | Variable | Mem0 | Zep | Letta (MemGPT) | Supermemory | Why it matters |
 |---|---|---|---|---|---|
@@ -98,10 +98,12 @@ For reference, each vendor's best self-reported LongMemEval accuracy:
 
 | System | Accuracy | Answer model | Judge | Source |
 |---|:---:|---|---|---|
-| **Synap** | **95.2%** | `gpt-5.4` | `gpt-4o` | This repo |
+| **Synap** (all 500 questions) | **95.6%** | `gemini-3.8-flash` | `gpt-4o` | This repo |
+| **Synap** (answerable questions) | 95.7% | `gemini-3.8-flash` | `gpt-4o` | This repo |
+| Mastra | 94.87% | `gpt-5-mini` | `gpt-4o` | [mastra.ai/research/observational-memory](https://mastra.ai/research/observational-memory) |
+| Hindsight (Vectorize) | 94.6% | Gemini 3 Pro Preview | Gemini (version not stated) | [agentmemorybenchmark.ai](https://agentmemorybenchmark.ai/dataset/longmemeval) (paper, Dec 2025: 91.4% with Gemini 3 Pro Preview) |
 | Mem0 | 94.4% | not stated | not stated | [docs.mem0.ai](https://docs.mem0.ai/core-concepts/memory-evaluation) |
 | EverMind | 94.0% | not stated | not stated | [evermind.ai](https://evermind.ai/) |
-| Hindsight (Vectorize) | 91.4% | Gemini 3 Pro Preview | not stated | [press release, Dec 2025](https://www.prnewswire.com/news-releases/vectorize-breaks-90-on-longmemeval-with-open-source-ai-agent-memory-system-302643146.html) |
 | Honcho | 90.4% | Claude Haiku 4.5 | not named | [honcho.dev/evals](https://honcho.dev/evals/) |
 | Zep | 90.2% | `gpt-5.4` | `gpt-5.4` | [getzep.com/research](https://www.getzep.com/research/) |
 | Supermemory | 85.2% | Gemini-3 Pro | `gpt-4o` | [supermemory.ai/research](https://supermemory.ai/research) (earlier accuracy figure) |
@@ -110,7 +112,7 @@ For reference, each vendor's best self-reported LongMemEval accuracy:
 | Zep (2025 paper) | 71.2% | `gpt-4o` | `gpt-4o` | [arXiv:2501.13956](https://arxiv.org/abs/2501.13956) |
 | Letta (MemGPT) | no first-party score found | n/a | n/a | n/a |
 
-All competitor figures are vendor-reported and were not verified by us. Hindsight's vectorize.io page separately shows 94.6% labeled "retrieval accuracy" with no stated definition or retrieval depth, so it is listed as a retrieval figure in the README, not as answer accuracy. Supermemory's current research page reports 97% Recall@20 on LongMemEval-S (judge `gpt-4o`), a retrieval metric rather than answer accuracy, so it is not in the table. Figures were read from the vendor pages on 2026-10-24.
+All competitor figures are vendor-reported and were not verified by us. Supermemory's current research page reports 97% Recall@20 on LongMemEval-S (judge `gpt-4o`), a retrieval metric rather than answer accuracy, so it is not in the table. Figures were read from the vendor pages on 2026-10-24.
 
 ---
 
@@ -118,13 +120,15 @@ All competitor figures are vendor-reported and were not verified by us. Hindsigh
 
 1. Clone the harness: [`maximem-ai/memory_and_context_eval_harness`](https://github.com/maximem-ai/memory_and_context_eval_harness).
 2. Download the datasets (`LongMemEval_S`, `locomo10`).
-3. Ingest into Synap, then run the answer and judge passes: `gpt-5.4` and `gpt-4o` for LongMemEval, `gpt-5-mini` for both on LoCoMo.
+3. Ingest into Synap, then run the answer and judge passes: `gemini-3.8-flash` and `gpt-4o` for LongMemEval, `gpt-5-mini` for both on LoCoMo.
 4. Score LongMemEval over all 500 questions; score LoCoMo over Cat 1-4.
 
-The full LongMemEval run is published in [`results/longmemeval/`](results/longmemeval/):
+The latest LongMemEval run is published in [`results/longmemeval/`](results/longmemeval/):
 
-- `question_records.json`: one record per question (500), with the question, gold answer, the memories Synap retrieved, the generated answer, and the judge verdict.
+- `question_records_gemini-3.8-flash.json`: one record per question (500), with the question, gold answer, the memories Synap retrieved, the generated answer, and the judge verdict.
+- `manifest_gemini-3.8-flash.json`: dataset variant, models, run date and prompt settings.
 - `LME_answering_prompt.md`: the prompt the answer model received.
-- `manifest.json`: dataset variant, models, run date and prompt settings.
 
-A question counts as correct when its `judge.judge_raw` starts with "yes" (any case). That gives 476 / 500.
+An earlier run with answer model `gpt-5.4` is in `question_records.json` and `manifest.json`.
+
+A question counts as correct when its `judge.judge_raw` starts with "yes" (any case). That gives 478 / 500.

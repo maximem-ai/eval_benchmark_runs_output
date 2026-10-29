@@ -7,9 +7,8 @@ the run from there.
 
 ## Settings used for the published results
 
-- LongMemEval: `LongMemEval_S`, all 500 questions. Answer model `gpt-5.4`, judge `gpt-4o` (binary yes / no using LongMemEval's per-question-type judge prompts)
+- LongMemEval: `LongMemEval_S`, all 500 questions. Answer model `gemini-3.8-flash`, judge `gpt-4o` (binary yes / no using LongMemEval's per-question-type judge prompts)
 - LoCoMo: `locomo10`, Cat 1-4 only (1,540 questions), adversarial Cat 5 excluded. Answer model and judge both `gpt-5-mini`
-- One run per benchmark
 - Datasets: `LongMemEval_S`, `locomo10`
 - LongMemEval answering prompt: [`results/longmemeval/LME_answering_prompt.md`](../results/longmemeval/LME_answering_prompt.md). The published run, prompts and per-question records are in [`results/longmemeval/`](../results/longmemeval/)
 

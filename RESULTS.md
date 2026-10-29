@@ -2,11 +2,11 @@
 
 Synap scores on LongMemEval and LoCoMo, broken down by category.
 These are the category-level numbers behind the published headlines of
-**LongMemEval 96.1%** (answerable, excluding 3 dataset-defect questions), **LongMemEval 95.2%** (all 500 questions), **LongMemEval Recall@20 98.1%** and **LoCoMo 93.2%**.
+**LongMemEval 95.6%** (all 500 questions), **LongMemEval 95.7%** (answerable questions), **LongMemEval Recall@20 98.1%** and **LoCoMo 93.2%**.
 
 ## Methodology
 
-- **LongMemEval:** answer model `gpt-5.4`, judge `gpt-4o` (binary yes / no).
+- **LongMemEval:** answer model `gemini-3.8-flash`, judge `gpt-4o` (binary yes / no), run in October 2026.
 - **LongMemEval:** full 500-question set.
 - **LongMemEval retrieval (Recall@20):** `gpt-4o` relevance judge over the first 20 retrieved memories; abstention questions excluded (470 questions).
 - **LoCoMo:** answer model `gpt-5-mini`, judge `gpt-5-mini` (binary CORRECT / WRONG).
@@ -15,63 +15,39 @@ These are the category-level numbers behind the published headlines of
 
 ---
 
-## LongMemEval: Answerable, excluding 3 dataset-defect questions 96.1%
-
-Three LongMemEval_S questions have gold answers the conversations do not support: `37f165cf`, `gpt4_731e37d7` and `7405e8b1` (the last is marked arguable). The run answered all three wrong.
-
-| Set | Correct / total | Score |
-|---|---|---|
-| Answerable, excluding the 3 defect questions | 449 / 467 | **96.1%** |
-| Answerable (30 abstention questions excluded) | 449 / 470 | 95.5% |
-| All 500 questions | 476 / 500 | 95.2% |
-
-**Answerable, excluding the 3 defect questions, by category**
-
-| Category | Score | Correct / n |
-|---|---|---|
-| single-session-user | **100.0%** | 64 / 64 |
-| knowledge-update | 98.6% | 71 / 72 |
-| temporal-reasoning | 96.9% | 123 / 127 |
-| single-session-preference | 96.7% | 29 / 30 |
-| single-session-assistant | 96.4% | 54 / 56 |
-| multi-session | 91.5% | 108 / 118 |
-| **Overall** | **96.1%** | **449 / 467** |
-
-**Answerable questions (30 abstention questions excluded), by category**
-
-| Category | Score | Correct / n |
-|---|---|---|
-| single-session-user | **100.0%** | 64 / 64 |
-| knowledge-update | 98.6% | 71 / 72 |
-| temporal-reasoning | 96.9% | 123 / 127 |
-| single-session-preference | 96.7% | 29 / 30 |
-| single-session-assistant | 96.4% | 54 / 56 |
-| multi-session | 89.3% | 108 / 121 |
-| **Overall** | **95.5%** | **449 / 470** |
-
-Each excluded question, with quotes: [`results/longmemeval/DATASET_DEFECTS.md`](results/longmemeval/DATASET_DEFECTS.md). The list as data: [`results/longmemeval/dataset_defects.json`](results/longmemeval/dataset_defects.json).
-
----
-
-## LongMemEval: Overall 95.2%
+## LongMemEval: Overall 95.6%
 
 Full benchmark: 500 questions across 6 categories.
 
 | Category | Synap | Correct / n |
 |---|---|---|
-| single-session-user | **100.0%** | 70 / 70 |
+| temporal-reasoning | **97.7%** | 130 / 133 |
 | knowledge-update | 97.4% | 76 / 78 |
-| temporal-reasoning | 97.0% | 129 / 133 |
 | single-session-preference | 96.7% | 29 / 30 |
 | single-session-assistant | 96.4% | 54 / 56 |
-| multi-session | 88.7% | 118 / 133 |
-| **Overall** | **95.2%** | **476 / 500** |
+| single-session-user | 95.7% | 67 / 70 |
+| multi-session | 91.7% | 122 / 133 |
+| **Overall** | **95.6%** | **478 / 500** |
 
 ---
 
+## LongMemEval: Answerable questions 95.7%
+
+30 abstention questions are excluded, which leaves 470.
+
+| Category | Synap | Correct / n |
+|---|---|---|
+| temporal-reasoning | **97.6%** | 124 / 127 |
+| knowledge-update | 97.2% | 70 / 72 |
+| single-session-preference | 96.7% | 29 / 30 |
+| single-session-assistant | 96.4% | 54 / 56 |
+| single-session-user | 95.3% | 61 / 64 |
+| multi-session | 92.6% | 112 / 121 |
+| **Overall** | **95.7%** | **450 / 470** |
+
 Per-question records for this run (question, gold answer, retrieved memories, generated
-answer, judge verdict) are in [`results/longmemeval/question_records.json`](results/longmemeval/question_records.json).
-Run details are in [`results/longmemeval/manifest.json`](results/longmemeval/manifest.json).
+answer, judge verdict) are in [`results/longmemeval/question_records_gemini-3.8-flash.json`](results/longmemeval/question_records_gemini-3.8-flash.json).
+Run details are in [`results/longmemeval/manifest_gemini-3.8-flash.json`](results/longmemeval/manifest_gemini-3.8-flash.json).
 
 ---
 
@@ -115,4 +91,4 @@ Full benchmark: 1,540 Cat 1-4 questions across 4 categories.
 - LoCoMo Cat 1-4 question counts: open-domain 841, multi-hop 321,
   single-hop 282, temporal 96 (adversarial 446 excluded).
 
-Both produce the headline 95.2 / 93.2 at full benchmark scale. The retrieval headline of 98.1% is computed over the 470 non-abstention LongMemEval questions.
+Both produce the headline 95.6 / 93.2 at full benchmark scale. The retrieval headline of 98.1% is computed over the 470 non-abstention LongMemEval questions.
