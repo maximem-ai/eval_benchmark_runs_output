@@ -29,6 +29,20 @@
 
 This repository publishes the benchmark results for [Maximem Synap](https://www.maximem.ai/synap), the memory layer for AI agents. It gives you the scores, how they were produced, and for LongMemEval every per-question record, so you can check the number instead of trusting it.
 
+<p align="center">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset=".github/chart-static.png">
+    <img src=".github/chart-animated.gif" alt="LongMemEval accuracy as published by each vendor: Maximem Synap 95.6 (all 500), Mastra 94.87, Hindsight 94.6, Mem0 94.4, Honcho 90.4, Zep 90.2, Supermemory 85.2" width="800">
+  </picture>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/comparison-table-dark.png">
+    <img src=".github/comparison-table-light.png" alt="Table 1: LongMemEval_S answer accuracy, all 500 questions. Maximem Synap 95.6% (answer model Gemini 3.8 Flash, judge gpt-4o), Mastra 94.87%, Hindsight 94.6%, Mem0 94.4%, Honcho 90.4%, Zep 90.2%, Supermemory 85.2%. Columns: context per question in tokens, run data public, eval harness open, answer model, judge model, score date." width="800">
+  </picture>
+</p>
+
 ---
 
 ## Results
@@ -142,13 +156,6 @@ The table lists each vendor's **own published** LongMemEval number next to the a
 \*\* Numbers for other vendors are vendor-reported and have not been verified by us. They report all 500 questions, so only the all-500 Maximem Synap row is like for like with them.
 
 **Recall@20** is an LLM-judged retrieval hit rate, computed on the 470 non-abstention questions, so it is the same on both Maximem Synap rows: a question counts as a hit when GPT-4o judges at least one of the first 20 retrieved memories relevant to the question and its gold answer, with abstention questions excluded. Our figure uses the public [MemoryBench](https://github.com/supermemoryai/memorybench) relevance prompt, and Supermemory's 97% is its own Recall@20 with aggregation. "Not published" means the vendor's LongMemEval page reports no retrieval metric (checked 2026-10-27).
-
-<p align="center">
-  <picture>
-    <source media="(prefers-reduced-motion: reduce)" srcset=".github/chart-static.png">
-    <img src=".github/chart-animated.gif" alt="LongMemEval accuracy as published by each vendor: Maximem Synap 95.6 (all 500), Mastra 94.87, Hindsight 94.6, Mem0 94.4, Honcho 90.4, Zep 90.2, Supermemory 85.2" width="720">
-  </picture>
-</p>
 
 Answer models, judges and prompts differ between vendors, so read this as context, not a controlled comparison. Why scores differ: [METHODOLOGY.md](METHODOLOGY.md#why-vendor-scores-differ).
 
