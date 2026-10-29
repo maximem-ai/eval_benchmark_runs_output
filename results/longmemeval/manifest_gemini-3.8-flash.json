@@ -1,0 +1,16 @@
+{
+  "benchmark": "LongMemEval",
+  "dataset_variant": "LongMemEval_S",
+  "questions": 500,
+  "date_run": "October 2026",
+  "answer_model": "gemini-3.8-flash",
+  "judge_model": "gpt-4o",
+  "answering_prompt": {
+    "file": "LME_answering_prompt.md",
+    "chunks": "with",
+    "metadata": "on",
+    "current_date_section": true
+  },
+  "judge_prompt": "LongMemEval evaluate_qa.py (per-question-type yes/no prompts)",
+  "records_file": "question_records_gemini-3.8-flash.json"
+}
